@@ -9,4 +9,6 @@ const student_controller_1 = require("./student.controller");
 const router = express_1.default.Router();
 // ! will call controller
 router.post("/create-student", student_controller_1.StudentController.createStudent);
+router.get("/", student_controller_1.StudentController.getAllStudents);
+router.get("/:studentId", student_controller_1.StudentController.getSingleStudent);
 exports.StudentRoutes = router;
