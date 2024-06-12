@@ -24,8 +24,9 @@ const localGuardianSchema = new mongoose_1.Schema({
 const studentSchema = new mongoose_1.Schema({
     id: { type: String, required: true },
     name: userNameSchema,
+    guardian: guardianSchema,
+    dateOfBirth: { type: String, required: true },
     gender: { type: String, enum: ['Male', 'Female'], required: true },
-    dateOfBirth: { type: String },
     email: { type: String, required: true },
     contactNo: { type: String, required: true },
     emergencyContactNo: { type: String, required: true },
@@ -35,9 +36,8 @@ const studentSchema = new mongoose_1.Schema({
     },
     presentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    guardian: guardianSchema,
     localGuardian: localGuardianSchema,
     profileImage: { type: String },
     isActive: { type: String, enum: ['active', 'block'] },
 });
-exports.StudentModel = (0, mongoose_1.model)('Student', studentSchema);
+exports.StudentModel = (0, mongoose_1.model)("student", studentSchema);

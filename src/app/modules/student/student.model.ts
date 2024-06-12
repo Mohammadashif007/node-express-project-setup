@@ -1,18 +1,18 @@
 import { Schema, model } from 'mongoose';
 import {
-  Guardian,
-  LocalGuardian,
-  Student,
-  UserName,
+  TGuardian,
+  TLocalGuardian,
+  TStudent,
+  TUserName,
 } from './student.interface';
 
-const userNameSchema = new Schema<UserName>({
+const userNameSchema = new Schema<TUserName>({
   firstName: { type: String, required: true },
   middleName: { type: String },
   lastName: { type: String, required: true },
 });
 
-const guardianSchema = new Schema<Guardian>({
+const guardianSchema = new Schema<TGuardian>({
   fatherName: { type: String, required: true },
   fatherOccupation: { type: String, required: true },
   fatherContactNo: { type: String, required: true },
@@ -21,18 +21,19 @@ const guardianSchema = new Schema<Guardian>({
   motherContactNo: { type: String, required: true },
 });
 
-const localGuardianSchema = new Schema<LocalGuardian>({
+const localGuardianSchema = new Schema<TLocalGuardian>({
   name: { type: String, required: true },
   occupation: { type: String, required: true },
   contactNo: { type: String, required: true },
   address: { type: String, required: true },
 });
 
-const studentSchema = new Schema<Student>({
+const studentSchema = new Schema<TStudent>({
   id: { type: String, required: true },
   name: userNameSchema,
+  guardian: guardianSchema,
+  dateOfBirth: { type: String, required: true },
   gender: { type: String, enum: ['Male', 'Female'], required: true },
-  dateOfBirth: { type: String },
   email: { type: String, required: true },
   contactNo: { type: String, required: true },
   emergencyContactNo: { type: String, required: true },
@@ -42,10 +43,10 @@ const studentSchema = new Schema<Student>({
   },
   presentAddress: { type: String, required: true },
   permanentAddress: { type: String, required: true },
-  guardian: guardianSchema,
   localGuardian: localGuardianSchema,
   profileImage: { type: String },
   isActive: { type: String, enum: ['active', 'block'] },
 });
 
-export const StudentModel = model<Student>('Student', studentSchema);
+
+export const StudentModel = model<TStudent>("student", studentSchema) 
